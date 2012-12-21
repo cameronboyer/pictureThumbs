@@ -1,0 +1,94 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Gallery</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="highslide-full.packed.js"></script>
+<link rel="stylesheet" type="text/css" href="highslide.css" />
+
+<script type="text/javascript">
+var pictures = new Array();
+var wedPics = new Array();
+var wedThumbs = new Array();
+
+var img = new Image();
+//add images into pictures
+
+for( i=1; i<=3; i++){
+	 pictures[i] = 'https://linuxsandbox.coleman.edu/~pm60360/PictureProject/Pictures/img_' +i+'.GIF';
+}
+
+for( i=1; i<=215; i++){
+	 wedPics[i] = 'http://offpools.com/weddingPictures/img ('+i+').jpg';
+}
+
+for(i =1;i<=215;i++)
+{				
+	wedThumbs[i] = 'http://www.offpools.com/weddingPictures/thumbs/img ('+i+')_Small.jpg';
+}
+
+hs.graphicsDir = 'graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+hs.showCredits = false;
+
+// Add the controlbar
+hs.addSlideshow({
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+<div class="highslide-gallery">
+
+</div>
+</body>
+
+
+<script type="text/javascript">
+for(i = 1;i<=wedPics.length;i++)
+{
+var wedImg = new Image();
+wedImg.src = wedPics[i];
+
+
+$('.highslide-gallery').append('<a href="' + wedImg.src + '" class="highslide"onclick="return hs.expand(this)">');
+
+
+
+	
+}
+
+$(".highslide").each(function(i, elm) {
+var thumbs = new Image();
+thumbs.src = wedThumbs[i];
+
+   // Prepend a index span to each element
+   $(elm).prepend('<img src="'+thumbs.src+'" title="Click to Enlarge"/></a>');
+   
+});
+
+</script>
+
+</html>

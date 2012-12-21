@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pictures</title>
+
+<script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.0.0.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="highslide.js"></script>
+<script>
+var pictures = new Array();
+var img = new Image();
+//add images into pictures
+
+for( i=1; i<=3; i++){
+	 pictures[i] = 'https://linuxsandbox.coleman.edu/~pm60360/PictureProject/Pictures/img_' +i+'.GIF';
+}
+
+
+
+
+
+</script>
+</head>
+
+
+<canvas id="PictureBox">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+//gets window height and width
+var windowH = window.innerHeight;
+var windowW = window.innerWidth;
+
+
+/*
+var img = new Image();
+img.src = 'https://linuxsandbox.coleman.edu/~pm60360/PictureProject/Pictures/img_1.GIF';
+*/
+var PictureBox = document.getElementById("PictureBox");
+var PictureBoxCT = PictureBox.getContext("2d");
+
+PictureBox.width = windowW;
+PictureBox.height = windowH;
+/* closure problem
+img.onload = function() {
+    
+for(var i = 1;i<=3;i++)
+{
+	var img = new Image();
+    img.src = pictures[i];
+	PictureBoxCT.drawImage(img,10,10);
+}
+      };
+closure problem*/
+
+/*works
+img.onload = function() {
+        PictureBoxCT.drawImage(img, 69, 50);
+      };
+*/
+
+
+for (i = 0; i <= pictures.length; i++) {  
+    img = new Image();  
+    img.src = pictures[i];  
+    img.onload = (function(img, i){ // temporary closure to store loop 
+      return function () { 
+	if(i==1)
+	{
+		PictureBoxCT.drawImage(img,10,10);
+	}else
+	{
+	var width = (((i-1)*img.width)+10);
+		PictureBoxCT.drawImage(img,width*1.05,10);
+	}
+	  // variables reference 
+          
+      }  
+    })(img, i);  
+  }
+var stage = new Kinetic.Stage({
+          container: "container",
+          width: windowW,
+          height: windowH
+        });  
+</script>
+<div id="container">
+
+</div>
+</html>
